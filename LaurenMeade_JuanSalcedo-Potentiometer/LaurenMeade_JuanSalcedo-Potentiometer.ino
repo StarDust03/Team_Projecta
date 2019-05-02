@@ -44,5 +44,25 @@ int analogValue = analogRead(analogPin);
     digitalWrite(ledpinYellow, LOW);
   }
 
+  if (analogValue > thresholdOrange) {
+    digitalWrite(ledpinOrange, HIGH);
+  } else {
+    digitalWrite(ledpinOrange, LOW);
+  }
   
+  if (analogValue > thresholdRed) {
+    digitalWrite(ledpipotent nRed, HIGH);
+  } else {
+    digitalWrite(ledpinRed, LOW);
+  }
+  
+  
+  if (analogValue > thresholdBlue) {
+    digitalWrite(ledpinBlue, HIGH);
+  } else {
+    digitalWrite(ledpinBlue, LOW);
+  }
+  
+  Serial.println(analogValue);
+  delay(1);
 }
