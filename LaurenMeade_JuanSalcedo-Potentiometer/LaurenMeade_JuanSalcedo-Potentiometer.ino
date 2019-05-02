@@ -6,10 +6,26 @@
  */
 
 
+int analogPin = A0;
+int ledpinBlue = 12;
+int ledpinGreen = 11;
+int ledpinYellow = 10;
+int ledpinOrange = 9;
+int ledpinRed = 8;
+const int thresholdBlue = 100;
+const int thresholdGreen = 200;
+const int thresholdYellow = 300;
+const int thresholdOrange = 400;
+const int thresholdRed = 500;
 
 void setup() {
   // put your setup code here, to run once:
-
+pinMode(ledpinRed, OUTPUT);
+  pinMode(ledpinOrange, OUTPUT);
+  pinMode(ledpinYellow, OUTPUT);
+  pinMode(ledpinGreen, OUTPUT);
+  pinMode(ledpinBlue, OUTPUT);
+  Serial.begin(9600);
 }
 
 void loop() {
