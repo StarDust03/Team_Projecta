@@ -51,7 +51,7 @@ int analogValue = analogRead(analogPin);
   }
   
   if (analogValue > thresholdRed) {
-    digitalWrite(ledpipotent nRed, HIGH);
+    digitalWrite(ledpin Red, HIGH);
   } else {
     digitalWrite(ledpinRed, LOW);
   }
