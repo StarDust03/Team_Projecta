@@ -6,63 +6,67 @@
  */
 
 
-int analogPin = A0;
-int ledpinBlue = 12;
-int ledpinGreen = 11;
-int ledpinYellow = 10;
-int ledpinOrange = 9;
-int ledpinRed = 8;
-const int thresholdBlue = 100;
-const int thresholdGreen = 200;
-const int thresholdYellow = 300;
-const int thresholdOrange = 400;
-const int thresholdRed = 500;
+const int trigPin = 9;
+const int echoPin = 10;
+long duration;
+int distance;
 
-void setup() {
-  // put your setup code here, to run once:
-pinMode(ledpinRed, OUTPUT);
-  pinMode(ledpinOrange, OUTPUT);
-  pinMode(ledpinYellow, OUTPUT);
+int ledpinBlue = 12;
+int ledpinYellow = 11;
+int ledpinRed = 8;
+int ledpinGreen = 13;
+const int thresholdBlue = 6;
+const int thresholdYellow = 4;
+const int thresholdRed = 2;
+const int thresholdGreen = 8;
+
+void setup()
+{
+  pinMode(ledpinRed, OUTPUT);
   pinMode(ledpinGreen, OUTPUT);
   pinMode(ledpinBlue, OUTPUT);
+  pinMode(ledpinYellow, OUTPUT);
+  pinMode(echoPin, INPUT);
+  pinMode(trigPin, OUTPUT);
   Serial.begin(9600);
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
-int analogValue = analogRead(analogPin);
+void loop()
+{
+  digitalWrite(ledpinBlue, LOW);
+  delayMicroseconds(2);
   
-  if (analogValue > thresholdGreen) {
-    digitalWrite(ledpinGreen, HIGH);
-  } else {
-    digitalWrite(ledpinGreen, LOW);
-  }
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
   
-  if (analogValue > thresholdYellow) {
+  duration = pulseIn(echoPin, HIGH);
+  distance = duration*0.034/2;
+  
+  if (distance > thresholdYellow) {
     digitalWrite(ledpinYellow, HIGH);
   } else {
     digitalWrite(ledpinYellow, LOW);
   }
-
-  if (analogValue > thresholdOrange) {
-    digitalWrite(ledpinOrange, HIGH);
-  } else {
-    digitalWrite(ledpinOrange, LOW);
-  }
   
-  if (analogValue > thresholdRed) {
-    digitalWrite(ledpin Red, HIGH);
+  if (distance > thresholdRed) {
+    digitalWrite(ledpinRed, HIGH);
   } else {
     digitalWrite(ledpinRed, LOW);
   }
   
-  
-  if (analogValue > thresholdBlue) {
+  if (distance > thresholdBlue) {
     digitalWrite(ledpinBlue, HIGH);
   } else {
     digitalWrite(ledpinBlue, LOW);
   }
   
-  Serial.println(analogValue);
+  if (distance > ledpinGreen) {
+    digitalWrite(ledpinGreen, HIGH);
+  } else {
+    digitalWrite(ledpinGreen, LOW);
+  }
+    
+  Serial.println(distance);
   delay(1);
 }
